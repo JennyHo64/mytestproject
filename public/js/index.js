@@ -65,7 +65,7 @@ function getMembers(){
                                         <th id="th-age">${age}</th>
                                         <th id="th-sex">${sex}</th>
                                     <td>
-                                        <button class="btn btn-primary" type="button" id="delete">刪除</button>
+                                        <button class="btn btn-primary" type="button" id="delete" data-toggle="modal" data-target="#delete-modal">刪除</button>
                                         <button class="btn btn-primary" type="button" id="modify" data-toggle="modal" data-target="#update-modal">修改</button>
                                     </td>
                                 </tr>`;
@@ -75,3 +75,30 @@ function getMembers(){
         })
     })
 } 
+
+//3.修改
+$(document).on('click','#modify',function(){
+    let thName = $(this).parent().parent().find('#th-name').text();  //忘記要怎麼看了
+    let thAge = $(this).parent().parent().find('#th-age').text();
+    let thSex = $(this).parent().parent().find('#th-sex').text();
+    
+    $('#name_m').val(thName);
+    $('#age_m').val(thAge);
+    $('#sex_m').val(thSex);
+
+})
+
+//4.刪除
+$(document).on('click','#delete',function(){  
+    let thName = $(this).parent().parent().find('#th-name').text();
+    let thAge = $(this).parent().parent().find('#th-age').text();
+    let thSex = $(this).parent().parent().find('#th-sex').text();
+  
+   
+    // $('#th-name').remove();
+    // $('#th-age').remove();
+    // $('#th-sex').remove();
+    // $('#delete').remove();
+    // $('#modify').remove();
+
+});

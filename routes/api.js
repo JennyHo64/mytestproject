@@ -32,4 +32,35 @@ router.post('/creat',function(req,res){
       });
 });
 
+//2.取得會員資料
+
+router.get('/take',function(req,res){
+    Cloudant({account:username, password:password}, function(err, cloudant) {
+        if (err) {
+          return console.log('Failed to initialize Cloudant: ' + err.message);
+        }
+    var db=cloudant.db.use("mytestdb");
+        let quary={
+            "selector": {
+                "_id": {
+                   "$gt": "0"
+                }
+             },
+             //"sort": [ {"timeStemp": "asc" }] //cloudant timeStemp index不能新增
+                
+            }
+    db.find(quary,function(err,data){
+        if (err) {
+            return console.log('Failed to find data in Cloudant: ' + err.message);
+          }
+        console.log(data);
+        res.status(200).json(data);
+    })
+        
+    });
+});
+
+//4.刪除會員資料
+
+
 module.exports = router; //後端城市寫完都需要加這一行供其他城市使用
